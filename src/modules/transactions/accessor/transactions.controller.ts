@@ -15,7 +15,7 @@ export class TransactionsController {
 
   @Post('process-csv')
   @UseInterceptors(FileInterceptor('file'))
-  async register(@UploadedFile() file: Express.Multer.File) {
-    await this.transactionsService.processTransactionsCSV(file);
+  async processCsv(@UploadedFile() file: Express.Multer.File) {
+    await this.transactionsService.processTransactionsCsv(file);
   }
 }

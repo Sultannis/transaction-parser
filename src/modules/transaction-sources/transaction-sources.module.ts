@@ -7,5 +7,6 @@ import { TransactionSourcesRepository } from './repository/transaction-sources.r
 @Module({
   imports: [TypeOrmModule.forFeature([TransactionSourceDao])],
   providers: [TransactionSourcesService, TransactionSourcesRepository],
+  exports: [TransactionSourcesService],
 })
 export class TransactionSourcesModule {}
