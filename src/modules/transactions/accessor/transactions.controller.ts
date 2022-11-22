@@ -7,6 +7,7 @@ import {
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { TransactionsService } from '../domain/transaction.service';
+import { Express } from 'express';
 
 @Controller('transactions')
 export class TransactionsController {
@@ -15,6 +16,6 @@ export class TransactionsController {
   @Post('process-csv')
   @UseInterceptors(FileInterceptor('file'))
   async register(@UploadedFile() file: Express.Multer.File) {
-    console.log(file);
+    await this.transactionsService.processTransactionsCSV(file);
   }
 }
