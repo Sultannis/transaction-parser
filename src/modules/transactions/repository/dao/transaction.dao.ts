@@ -12,8 +12,17 @@ export class TransactionDao {
   @PrimaryGeneratedColumn({ name: 'id', type: 'bigint' })
   id: number;
 
-  @Column({ name: 'source_id', type: 'varchar', length: 255 })
-  name: string;
+  @Column({ name: 'source_id', type: 'bigint' })
+  sourceId: number;
+
+  @Column({ name: 'amount', type: 'int' })
+  amount: number;
+
+  @Column({ name: 'description', type: 'varchar' })
+  description: string;
+
+  @Column({ name: 'transfer_date', type: 'timestamp' })
+  transferDate: string;
 
   @CreateDateColumn({ name: 'created_at', type: 'timestamp' })
   createdAt: string;
