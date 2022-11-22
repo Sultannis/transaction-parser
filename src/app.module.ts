@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { databaseConfiguration } from './common/configurations/database.configuration';
 import { AuthModule } from './modules/auth/auth.module';
+import { UserDao } from './modules/users/repository/dao/user.dao';
 import { UsersModule } from './modules/users/users.module';
 
 @Module({
@@ -15,7 +16,7 @@ import { UsersModule } from './modules/users/users.module';
       username: databaseConfiguration.username,
       password: databaseConfiguration.password,
       database: databaseConfiguration.database,
-      entities: ['src/common/dao/*{.ts,.js}'],
+      entities: [UserDao],
       migrations: ['../database/migrations/*{.ts,.js}'],
       synchronize: false,
     }),
