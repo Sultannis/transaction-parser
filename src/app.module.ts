@@ -11,7 +11,7 @@ import { databaseConfiguration } from './common/configurations/database.configur
       username: databaseConfiguration.username,
       password: databaseConfiguration.password,
       database: databaseConfiguration.database,
-      entities: [],
+      entities: ['src/common/dao/*{.ts,.js}'],
       migrations: ['../database/migrations/*{.ts,.js}'],
       synchronize: false,
     }),
