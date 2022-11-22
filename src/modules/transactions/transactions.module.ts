@@ -1,9 +1,13 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { TransactionsController } from './accessor/transactions.controller';
+import { TransactionsService } from './domain/transaction.service';
 import { TransactionDao } from './repository/dao/transaction.dao';
+import { TransactionsRepository } from './repository/transactions.repository';
 
 @Module({
   imports: [TypeOrmModule.forFeature([TransactionDao])],
-  providers: [],
+  controllers: [TransactionsController],
+  providers: [TransactionsService, TransactionsRepository],
 })
-export class TransactionSourcesModule {}
+export class TransactionModule {}
