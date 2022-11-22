@@ -2,8 +2,7 @@ import { Injectable } from '@nestjs/common';
 import * as bcrypt from 'bcryptjs';
 import * as jwt from 'jsonwebtoken';
 import { authConfiguration } from 'src/common/configurations/auth.configuration';
-import { UserTokenDto } from 'src/modules/auth/dto/user-token.dto';
-import { AdminTokenDto } from '../dto/admin-token.dto';
+import { UserTokenDto } from 'src/modules/auth/dtos/user-token.dto';
 
 @Injectable()
 export class AuthService {
@@ -30,15 +29,7 @@ export class AuthService {
     });
   }
 
-  decodeToken(token: string): any {
-    return jwt.verify(token, authConfiguration.jwtSecret);
-  }
-
   generateUserAuthToken(payload: UserTokenDto): string {
-    return jwt.sign(payload, authConfiguration.jwtSecret, { expiresIn: '7d' });
-  }
-
-  generateAdminAuthToken(payload: AdminTokenDto): string {
     return jwt.sign(payload, authConfiguration.jwtSecret, { expiresIn: '7d' });
   }
 }
