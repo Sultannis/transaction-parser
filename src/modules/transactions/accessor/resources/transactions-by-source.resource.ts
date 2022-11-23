@@ -1,15 +1,19 @@
 import { Injectable } from '@nestjs/common';
-import { Transaction } from 'src/common/entities/transaction';
+import { TransactionBySourceDto } from '../../dtos/transaction-by-source.dto';
 import { TransactionSumByDateResource } from './transaction-sum-by-date.resource';
 
 @Injectable()
 export class TransactionBySourceResource {
-  constructor() {}
-  
-  convert(transactionBySource) {
+  constructor(
+    private readonly transactionSumByDateResource: TransactionSumByDateResource,
+  ) {}
+
+  convert(transactionBySource: TransactionBySourceDto) {
     return {
       source: transactionBySource.source,
-      data: TransactionSumByDateResource[],
+      data: transactionBySource.data.map(
+        this.transactionSumByDateResource.convert,
+      ),
     };
   }
 }

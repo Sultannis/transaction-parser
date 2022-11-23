@@ -9,10 +9,14 @@ import {
 import { FileInterceptor } from '@nestjs/platform-express';
 import { TransactionsService } from '../domain/transaction.service';
 import { Express } from 'express';
+import { TransactionBySourceResource } from './resources/transactions-by-source.resource';
 
 @Controller('transactions')
 export class TransactionsController {
-  constructor(private readonly transactionsService: TransactionsService) {}
+  constructor(
+    private readonly transactionsService: TransactionsService,
+    private readonly transactionBySourceResource: TransactionBySourceResource,
+  ) {}
 
   @Post('process-csv')
   @UseInterceptors(FileInterceptor('file'))
@@ -31,7 +35,9 @@ export class TransactionsController {
     });
 
     return {
-      transactions,
+      transactions: transactions.map((transaction) =>
+        this.transactionBySourceResource.convert(transaction),
+      ),
     };
   }
 }
