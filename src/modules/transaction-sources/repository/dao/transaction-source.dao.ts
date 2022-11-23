@@ -17,13 +17,13 @@ export class TransactionSourceDao {
   @Column({ name: 'name', type: 'varchar', length: 255 })
   name: string;
 
-  @CreateDateColumn({ name: 'created_at', type: 'timestamp' })
+  @CreateDateColumn({ name: 'created_at', type: 'timestamptz' })
   createdAt: string;
 
-  @UpdateDateColumn({ name: 'updated_at', type: 'timestamp' })
+  @UpdateDateColumn({ name: 'updated_at', type: 'timestamptz' })
   updatedAt: string;
 
-  @DeleteDateColumn({ name: 'deleted_at', type: 'timestamp', nullable: true })
+  @DeleteDateColumn({ name: 'deleted_at', type: 'timestamptz', nullable: true })
   deletedAt?: string;
 
   @OneToMany(() => TransactionDao, (transaction) => transaction.source)

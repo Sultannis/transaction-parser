@@ -34,21 +34,21 @@ export class createTransactionsTable1669141611557
           },
           {
             name: 'transfer_date',
-            type: 'timestamp',
+            type: 'timestamptz',
           },
           {
             name: 'created_at',
-            type: 'timestamp',
+            type: 'timestamptz',
             default: 'now()',
           },
           {
             name: 'updated_at',
-            type: 'timestamp',
+            type: 'timestamptz',
             default: 'now()',
           },
           {
             name: 'deleted_at',
-            type: 'timestamp',
+            type: 'timestamptz',
             isNullable: true,
           },
         ],

@@ -7,6 +7,7 @@ import {
   UpdateDateColumn,
   DeleteDateColumn,
   ManyToOne,
+  JoinColumn,
 } from 'typeorm';
 
 @Entity('transactions')
@@ -23,18 +24,19 @@ export class TransactionDao {
   @Column({ name: 'description', type: 'varchar' })
   description: string;
 
-  @Column({ name: 'transfer_date', type: 'timestamp' })
+  @Column({ name: 'transfer_date', type: 'timestamptz' })
   transferDate: string;
 
-  @CreateDateColumn({ name: 'created_at', type: 'timestamp' })
+  @CreateDateColumn({ name: 'created_at', type: 'timestamptz' })
   createdAt: string;
 
-  @UpdateDateColumn({ name: 'updated_at', type: 'timestamp' })
+  @UpdateDateColumn({ name: 'updated_at', type: 'timestamptz' })
   updatedAt: string;
 
-  @DeleteDateColumn({ name: 'deleted_at', type: 'timestamp', nullable: true })
+  @DeleteDateColumn({ name: 'deleted_at', type: 'timestamptz', nullable: true })
   deletedAt?: string;
 
+  @JoinColumn({ name: 'source_id' })
   @ManyToOne(
     () => TransactionSourceDao,
     (transactionSource) => transactionSource.transactions,

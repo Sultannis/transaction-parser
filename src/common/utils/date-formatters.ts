@@ -4,13 +4,13 @@ dayjs.extend(customParseFormat);
 
 export const formatStringDateToISOString = (dayString: string) => {
   return dayjs(dayString, 'DD-MM-YYYY')
-    .set('hour', 0)
-    .set('minute', 0)
+    .set('hour', 12)
+    .set('minute', 30)
     .set('second', 0)
     .set('millisecond', 0)
     .toISOString();
 };
 
 export const formatISOStringToStringDate = (isoString: string) => {
-  return dayjs(isoString)
-}
+  return dayjs(isoString);
+};
