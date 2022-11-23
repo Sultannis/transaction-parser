@@ -4,10 +4,8 @@ import { Injectable } from '@nestjs/common';
 import { TransactionDao } from './dao/transaction.dao';
 import { CreateTransactionDto } from '../dtos/create-transaction.dto';
 import { Transaction } from 'src/common/entities/transaction';
-import {
-  formatISODateToStringDate,
-  formatPartialStringDateToISOString,
-} from 'src/common/utils/date-formatters';
+import { formatISODateToStringDate } from 'src/common/utils/date-formatters';
+import { TransactionSumByDateDto } from '../dtos/transaction-sum-by-date.dto';
 
 @Injectable()
 export class TransactionsRepository {
@@ -22,17 +20,10 @@ export class TransactionsRepository {
     return this.transactionsRepository.save(source);
   }
 
-  fetchSumGroupedByDate() {
-    return this.transactionsRepository
-      .createQueryBuilder('transaction')
-      .select("date_trunc('month', transaction.transfer_date)", 'date_to_group')
-      .addSelect('SUM(transaction.amount)', 'total')
-      .groupBy("date_trunc('month', transaction.transfer_date)")
-      .where('transaction.source_id = 2')
-      .getRawMany();
-  }
-
-  async findSumsBySourceId({ sourceId, date }) {
+  async findSumsBySourceId({
+    sourceId,
+    date,
+  }): Promise<TransactionSumByDateDto[]> {
     let query = this.transactionsRepository
       .createQueryBuilder('transaction')
       .select("date_trunc('month', transaction.transfer_date)", 'date')
