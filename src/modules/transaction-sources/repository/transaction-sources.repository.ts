@@ -25,4 +25,8 @@ export class TransactionSourcesRepository {
       name,
     });
   }
+
+  findAll(): Promise<TransactionSource[]> {
+    return this.transactionSourcesRepository.find();
+  }
 }

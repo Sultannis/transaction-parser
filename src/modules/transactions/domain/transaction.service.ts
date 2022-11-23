@@ -40,12 +40,33 @@ export class TransactionsService {
     }
   }
 
-  async fetchAll(bySources: boolean) {
-    if (bySources) {
-      return this.transactionSourcesService.fetchTransactions();
+  async fetchAll({ source: sourceName, date }) {
+    let sources = [];
+
+    if (sourceName) {
+      const source = await this.transactionSourcesService.findByName(
+        sourceName,
+      );
+      sources.push(source);
+    } else {
+      sources = await this.transactionSourcesService.fetchAll();
     }
 
-    const transactions = this.transactionsRepository.fetchSumGroupedByDate();
+    const transactions = [];
+
+    for (const source of sources) {
+      const transactionsOfSource =
+        await this.transactionsRepository.findSumsBySourceId({
+          sourceId: source.id,
+          date,
+        });
+
+      transactions.push({
+        source: source.name,
+        data: transactionsOfSource,
+      });
+    }
+
     return transactions;
   }
 

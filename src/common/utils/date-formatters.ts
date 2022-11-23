@@ -11,6 +11,11 @@ export const formatStringDateToISOString = (dayString: string) => {
     .toISOString();
 };
 
-export const formatISOStringToStringDate = (isoString: string) => {
-  return dayjs(isoString);
+export const formatPartialStringDateToISOString = (dayString: string) => {
+  return dayjs(dayString, 'MM-YYYY').toISOString();
+};
+
+export const formatISODateToStringDate = (date: Date) => {
+  const isoString = date.toISOString();
+  return `${isoString.slice(5, 7)}-${isoString.slice(0, 4)}`;
 };
