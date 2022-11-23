@@ -1,3 +1,4 @@
+import { TransactionDao } from 'src/modules/transactions/repository/dao/transaction.dao';
 import {
   Entity,
   PrimaryGeneratedColumn,
@@ -5,6 +6,7 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   DeleteDateColumn,
+  OneToMany,
 } from 'typeorm';
 
 @Entity('transaction_sources')
@@ -23,4 +25,7 @@ export class TransactionSourceDao {
 
   @DeleteDateColumn({ name: 'deleted_at', type: 'timestamp', nullable: true })
   deletedAt?: string;
+
+  @OneToMany(() => TransactionDao, (transaction) => transaction.source)
+  transactions: TransactionDao[];
 }

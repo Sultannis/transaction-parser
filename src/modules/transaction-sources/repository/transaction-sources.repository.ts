@@ -23,4 +23,8 @@ export class TransactionSourcesRepository {
       name
     })
   }
+
+  findTransactionsBySources(): Promise<TransactionSource> {
+    return this.transactionSourcesRepository.createQueryBuilder('source').
+  }
 }

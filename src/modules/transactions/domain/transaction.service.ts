@@ -40,6 +40,12 @@ export class TransactionsService {
     }
   }
 
+  async fetchAll(bySources: boolean) {
+    if(bySources) {
+      return this.transactionSourcesService.fetchTransactions()
+    }
+  }
+
   private async saveTemporaryFile(file: Express.Multer.File): Promise<void> {
     return fs
       .writeFile(`src/storage/${file.originalname}`, file.buffer)

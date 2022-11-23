@@ -20,4 +20,8 @@ export class TransactionSourcesService {
 
     return this.transactionSourcesRepository.insertAndFetch(payload);
   }
+
+  async fetchTransactions(): Promise<TransactionSource[]> {
+    await this.transactionSourcesRepository.findTransactionsBySources()
+  }
 }
