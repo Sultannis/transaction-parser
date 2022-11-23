@@ -41,9 +41,12 @@ export class TransactionsService {
   }
 
   async fetchAll(bySources: boolean) {
-    if(bySources) {
-      return this.transactionSourcesService.fetchTransactions()
+    if (bySources) {
+      return this.transactionSourcesService.fetchTransactions();
     }
+
+    const transactions = this.transactionsRepository.fetchSumGroupedByDate();
+    return transactions;
   }
 
   private async saveTemporaryFile(file: Express.Multer.File): Promise<void> {

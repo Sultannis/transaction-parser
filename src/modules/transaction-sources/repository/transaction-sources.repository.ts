@@ -12,19 +12,17 @@ export class TransactionSourcesRepository {
     private readonly transactionSourcesRepository: Repository<TransactionSourceDao>,
   ) {}
 
-  insertAndFetch(payload: CreateTransactionSourceDto): Promise<TransactionSource> {
-    const source =  this.transactionSourcesRepository.create(payload)
-  
-    return this.transactionSourcesRepository.save(source)
+  insertAndFetch(
+    payload: CreateTransactionSourceDto,
+  ): Promise<TransactionSource> {
+    const source = this.transactionSourcesRepository.create(payload);
+
+    return this.transactionSourcesRepository.save(source);
   }
 
   findOneByName(name: string): Promise<TransactionSource> {
     return this.transactionSourcesRepository.findOneBy({
-      name
-    })
-  }
-
-  findTransactionsBySources(): Promise<TransactionSource> {
-    return this.transactionSourcesRepository.createQueryBuilder('source').
+      name,
+    });
   }
 }

@@ -10,3 +10,7 @@ export const formatStringDateToISOString = (dayString: string) => {
     .set('millisecond', 0)
     .toISOString();
 };
+
+export const formatISOStringToStringDate = (isoString: string) => {
+  return dayjs(isoString)
+}

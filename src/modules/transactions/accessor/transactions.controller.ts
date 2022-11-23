@@ -29,6 +29,10 @@ export class TransactionsController {
   async getTransactionsBySources(@Query('by-sources') bySourcesQuery: String) {
     const bySources = bySourcesQuery === 'true' || bySourcesQuery === '1';
 
-    await this.transactionsService.fetchAll(bySources);
+    const result = await this.transactionsService.fetchAll(bySources);
+
+    return {
+      result,
+    };
   }
 }

@@ -17,4 +17,13 @@ export class TransactionsRepository {
 
     return this.transactionsRepository.save(source);
   }
+
+  fetchSumGroupedByDate() {
+    return this.transactionsRepository
+      .createQueryBuilder('transaction')
+      .select("date_trunc('month', transaction.transfer_date)", 'date_to_group')
+      .addSelect('SUM(transaction.amount)', 'total')
+      .groupBy("date_trunc('month', transaction.transfer_date)")
+      .getRawMany();
+  }
 }
