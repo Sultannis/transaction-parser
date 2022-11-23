@@ -40,7 +40,7 @@ export class TransactionsService {
     }
   }
 
-  async fetchAll({ source: sourceName, date }) {
+  async fetchSumsByDates({ source: sourceName, date }) {
     let sources = [];
 
     if (sourceName) {
